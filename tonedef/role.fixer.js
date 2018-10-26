@@ -16,7 +16,7 @@ var roleFixer = {
 					tower.repair(walls[0]);
 				} else {
 					var others = _.filter(structs,
-						(structure) => structure.structureType != STRUCTURE_ROAD && structure.structureType != STRUCTURE_ROAD);
+						(structure) => structure.structureType != STRUCTURE_ROAD && structure.structureType != STRUCTURE_WALL);
 					if(others.length > 0) {
 						tower.repair(others[0]);
 					}
