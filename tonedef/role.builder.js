@@ -27,6 +27,18 @@ var roleBuilder = {
 					if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(struct);
 					}
+				} else {
+					if(Game.spawns['s0'].energy == Game.spawns['s0'].energyCapacity) {
+						var structs = _.filter(Game.structures,
+							(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
+						var struct;
+						if(structs.length) {
+							struct = creep.pos.findClosestByRange(structs);
+							if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+								creep.moveTo(struct);
+							}
+						}
+					}
 				}
 			}
 		}
