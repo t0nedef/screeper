@@ -36,6 +36,11 @@ var roleBuilder = {
 						if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 							creep.moveTo(struct);
 						}
+					} else {
+						var store = Game.getObjectById("5bd786384adfe33c50d16147");
+						if(creep.transfer(store, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(store);
+						}
 					}
 				}
 			}
