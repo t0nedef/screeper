@@ -20,31 +20,12 @@ var roleBuilder = {
 					creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
 				}
 			} else {
-//				creep.say('ðŸš§ no targets, resourcing spawn');
-				if(Game.spawns['s0'].energy == Game.spawns['s0'].energyCapacity) {
-					var structs = _.filter(Game.structures,
-						(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
-					var struct;
-					if(structs.length) {
-						struct = creep.pos.findClosestByRange(structs);
-						if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-							creep.moveTo(struct);
-						}
-					} else {
-//						console.log('Looking for the tower');
-						structs = _.filter(creep.room.find(FIND_STRUCTURES),
-							(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
-						if(structs.length) {
-							struct = creep.pos.findClosestByRange(structs);
-							if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-								creep.moveTo(struct);
-							}
-						}
-					}
-				}
-				else {
-					if(creep.transfer(Game.spawns['s0'], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-						creep.moveTo(Game.spawns['s0']);
+				structs = _.filter(creep.room.find(FIND_STRUCTURES),
+					(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
+				if(structs.length) {
+					struct = creep.pos.findClosestByRange(structs);
+					if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(struct);
 					}
 				}
 			}
