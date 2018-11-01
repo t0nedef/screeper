@@ -34,7 +34,7 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.room.energyAvailable > 400) { //TODO: change to energy in room
+		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
 			// respawn miner
 			// alpha
 			var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'aminer');
