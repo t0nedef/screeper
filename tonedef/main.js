@@ -35,15 +35,15 @@ module.exports.loop = function () {
 			}
 		}
 
-//		if(spawn.room.energyAvailable > 500) { //TODO: change to big miner
-		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
+		if(spawn.room.energyAvailable > 500) { //TODO: change to big miner
+//		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
 			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+				spawn.spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
 					{memory: {role: 'aminer', spawn: name, source: 0}});
 			}
 			// beta
