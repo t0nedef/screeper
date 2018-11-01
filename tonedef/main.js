@@ -26,7 +26,7 @@ module.exports.loop = function () {
 		// respawn harvester
 		if(spawn.room.energyAvailable > 200) {
 			var harvesters = _.filter(creeps, (creep) => creep.memory.role == 'harvester');
-			if(harvesters.length < 2) {
+			if(harvesters.length < 3) {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -34,14 +34,16 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.room.energyAvailable > 400) {
+//		if(spawn.room.energyAvailable > 400) {
+		if(spawn.room.energyAvailable > 200) {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
-			if(miners.length < 3) {
+			if(miners.length < 5) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
-				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
+//				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 					{memory: {role: 'aminer', spawn: name, source: 0}});
 			}
 			// beta
@@ -58,7 +60,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
-			if(geners.length < 5) {
+			if(geners.length < 3) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -69,7 +71,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
-			if(upgraders.length < 6) {
+			if(upgraders.length < 5) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 

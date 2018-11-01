@@ -45,8 +45,11 @@ var roleGeneral = {
 			}
 		}
 		else {
-			var source = creep.room.storage;
-			if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+			var sources = creep.room.find(FIND_SOURCES);
+			var source = sources[creep.memory.source];
+			if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+//			var source = creep.room.storage;
+//			if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 			}
 		}
