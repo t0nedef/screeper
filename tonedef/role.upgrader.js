@@ -6,7 +6,7 @@ var roleUpgrader = {
 		if(creep.carry.energy < creep.memory.targetEnergy) {
 			creep.memory.targetEnergy = creep.carryCapacity;
 			var source = creep.room.storage;
-			if(source.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+			if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 			}
 		}
