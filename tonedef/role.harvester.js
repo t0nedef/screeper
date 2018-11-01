@@ -9,7 +9,7 @@ var roleHarvester = {
 			if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 			}
-		} else if(Game.spawns[creep.memory.spawn].energy == Game.spawns[creep.memory.spawn].energyCapacity) {
+		} else {
 			var structs = _.filter(Game.structures,
 				(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
 			var struct;
@@ -18,10 +18,10 @@ var roleHarvester = {
 				if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(struct);
 				}
-			}
-		} else {
-			if(creep.transfer(Game.spawns[creep.memory.spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(Game.spawns[creep.memory.spawn]);
+			} else {
+				if(creep.transfer(Game.spawns[creep.memory.spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(Game.spawns[creep.memory.spawn]);
+				}
 			}
 		}
 	}
