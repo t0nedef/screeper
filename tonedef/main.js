@@ -63,6 +63,7 @@ module.exports.loop = function () {
 	// screep task list
 	for(var name in Game.creeps) {
 		var creep = Game.creeps[name];
+		creep.memory.spawn = "s0";
 		if(creep.memory.role == 'harvester') {
 			harv.run(creep, 1);
 		}
