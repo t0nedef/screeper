@@ -77,13 +77,13 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.room.energyAvailable > 650) {
+		if(spawn.room.energyAvailable > 830) {
 			// respawn seeker
 			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
 			if(seeker.length < 2) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				spawn.spawnCreep([CLAIM,MOVE], newName, 
+				spawn.spawnCreep([ATTACK,ATTACK,TOUGH,TOUGH,CLAIM,MOVE], newName, 
 					{memory: {role: 'seeker', spawn: name}});
 			}
 		}
@@ -126,6 +126,11 @@ module.exports.loop = function () {
 				if(creep.room.name == "E12N37") {
 					creep.moveTo(3, 49, "E12N37");
 				} else {
+					// hostiles
+					var attackers = creep.room.find(FIND_HOSTILE_CREEPS);
+					if(attackers.length > 0) {
+						creep.attack(attackers[0]);
+					}
 					// room == "E12N36"
 					creep.moveTo(creep.room.controller);
 					//creep.claimController(creep.room.controller);
