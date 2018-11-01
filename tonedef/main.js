@@ -20,11 +20,12 @@ module.exports.loop = function () {
 	// spawn tasks
 	for(var name in Game.spawns) {
 		var spawn = Game.spawns[name];
+		var creeps = spawn.room.find(FIND_MY_CREEPS);
 	
 		// respawn
 		// respawn harvester
 		if(spawn.room.energyAvailable > 200) {
-			var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+			var harvesters = _.filter(creeps, (creep) => creep.memory.role == 'harvester');
 			if(harvesters.length < 3) {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
@@ -37,7 +38,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
 			// respawn miner
 			// alpha
-			var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'aminer');
+			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
 			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
@@ -45,7 +46,7 @@ module.exports.loop = function () {
 					{memory: {role: 'aminer', spawn: name, source: 0}});
 			}
 			// beta
-			miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'bminer');
+			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
 			if(miners.length < 0) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new beta miner: ' + newName);
@@ -56,7 +57,7 @@ module.exports.loop = function () {
 			}
 
 			// respawn builder
-			var geners = _.filter(Game.creeps, (creep) => creep.memory.role == 'general');
+			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
 			if(geners.length < 6) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
@@ -67,7 +68,7 @@ module.exports.loop = function () {
 
 		if(spawn.energy > 200) { //TODO: change to energy in room
 			// respawn upgrader
-			var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
 			if(upgraders.length < 8) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
@@ -76,7 +77,7 @@ module.exports.loop = function () {
 			}
 
 			// respawn seeker
-			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
+			var seeker = _.filter(creeps, (creep) => creep.memory.role == 'seeker');
 			if(seeker.length < 1) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
