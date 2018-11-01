@@ -54,9 +54,7 @@ module.exports.loop = function () {
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'bminer', spawn: name, source: 1}});
 			}
-		}
 
-		if(spawn.energy > 200) { //TODO: change to energy in room
 			// respawn builder
 			var geners = _.filter(Game.creeps, (creep) => creep.memory.role == 'general');
 			if(geners.length < 6) {
@@ -65,7 +63,9 @@ module.exports.loop = function () {
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'general', spawn: name}});
 			}
+		}
 
+		if(spawn.energy > 200) { //TODO: change to energy in room
 			// respawn upgrader
 			var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 			if(upgraders.length < 8) {
