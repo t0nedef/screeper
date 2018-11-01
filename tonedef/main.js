@@ -41,7 +41,7 @@ module.exports.loop = function () {
 			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
-				spawn.spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'aminer', spawn: name, source: 0}});
 			}
 			// beta
@@ -50,7 +50,8 @@ module.exports.loop = function () {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new beta miner: ' + newName);
 //			Game.spawns['s0'].spawnCreep( [WORK,WORK,WORK,CARRY,MOVE,MOVE,MOVE], newName,
-				spawn.spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
+//				spawn.spawnCreep([WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'bminer', spawn: name, source: 1}});
 			}
 		}
