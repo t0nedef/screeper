@@ -83,7 +83,7 @@ module.exports.loop = function () {
 			if(seeker.length < 3) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				spawn.spawnCreep([ATTACK,ATTACK,TOUGH,CLAIM,MOVE,MOVE], newName, 
+				spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
 					{memory: {role: 'seeker', spawn: name}});
 			}
 		}
