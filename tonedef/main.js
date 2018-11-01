@@ -68,7 +68,7 @@ module.exports.loop = function () {
 
 			// respawn upgrader
 			var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-			if(upgraders.length < 12) {
+			if(upgraders.length < 8) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
