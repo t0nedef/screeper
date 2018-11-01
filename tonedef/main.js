@@ -25,7 +25,7 @@ module.exports.loop = function () {
 		// respawn harvester
 		if(spawn.room.energyAvailable > 200) {
 			var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-			if(harvesters.length < 5) {
+			if(harvesters.length < 3) {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
 //			Game.spawns['s0'].spawnCreep( [WORK,WORK,WORK,CARRY,MOVE,MOVE,MOVE], newName,
