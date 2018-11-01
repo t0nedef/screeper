@@ -77,7 +77,7 @@ module.exports.loop = function () {
 
 			// respawn seeker
 			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seeker.length < 0) {
+			if(seeker.length < 1) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
 				spawn.spawnCreep([CLAIM,MOVE], newName, 
@@ -117,10 +117,18 @@ module.exports.loop = function () {
 			miner.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
-//			creep.moveTo(11, 42, "E12N36");
-			creep.moveTo(creep.room.controller);
-//		   creep.reserveController(creep.room.controller);
+			if(creep.room.name == "E11N37") {
+				creep.moveTo(49, 44, "E11N37");
+			} else {
+				if(creep.room.name == "E12N37") {
+					creep.moveTo(3, 49, "E12N37");
+				} else {
+					// room == "E12N36"
+					creep.moveTo(creep.room.controller);
+					creep.reserveController(creep.room.controller);
 //		   creep.claimController(creep.room.controller);
+				}
+			}
 		}
 	}
 
