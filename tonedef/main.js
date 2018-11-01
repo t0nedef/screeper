@@ -58,8 +58,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
-			if(geners.length < 0) {
-//			if(geners.length < 6) {
+			if(geners.length < 5) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -70,8 +69,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
-			if(upgraders.length < 0) {
-//			if(upgraders.length < 8) {
+			if(upgraders.length < 6) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
