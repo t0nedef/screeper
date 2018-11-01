@@ -130,15 +130,18 @@ module.exports.loop = function () {
 					var attackers = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
 					if(attackers.length > 0) {
 						creep.attack(attackers[0]);
+					} else {
+						//creep.claimController(creep.room.controller);
+						if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(creep.room.controller);
+						} else {
+							// room == "E12N36"
+							var attackit = Game.getObjectById("5bdb2b569254897ed82bc39d");
+							if(attackit) {
+								creep.attack(attackit);
+							}
+						}
 					}
-//					var attackit = Game.getObjectById("5bdb27a82881505b9341a917");
-//					if(attackit) {
-//						creep.attack(attackit);
-//					}
-					// room == "E12N36"
-					creep.moveTo(creep.room.controller);
-					//creep.claimController(creep.room.controller);
-					creep.reserveController(creep.room.controller);
 				}
 			}
 		}
