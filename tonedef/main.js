@@ -23,16 +23,18 @@ module.exports.loop = function () {
 	
 		// respawn
 		// respawn harvester
-		var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-		if(harvesters.length < 5) {
-			var newName = 'harv' + Game.time;
-			console.log('Spawning new harvester: ' + newName);
+		if(spawn.room.energyAvailable > 200) {
+			var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+			if(harvesters.length < 5) {
+				var newName = 'harv' + Game.time;
+				console.log('Spawning new harvester: ' + newName);
 //			Game.spawns['s0'].spawnCreep( [WORK,WORK,WORK,CARRY,MOVE,MOVE,MOVE], newName,
-			spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-				{memory: {role: 'harvester', spawn: name, source: 1}});
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+					{memory: {role: 'harvester', spawn: name, source: 1}});
+			}
 		}
 
-		if(spawn.energy > 200) { //TODO: change to energy in room
+		if(spawn.room.energyAvailable > 400) { //TODO: change to energy in room
 			// respawn miner
 			// alpha
 			var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'aminer');
@@ -83,7 +85,7 @@ module.exports.loop = function () {
 		}
 
 		// renew creeps
-		var creeps = spawn.pos.findInRange(FIND_CREEPS,3);
+		var creeps = spawn.pos.findInRange(FIND_CREEPS,2);
 		creeps = _.filter(creeps, (creep) => creep.ticksToLive < 1000);
 		for(var i in creeps) {
 			console.log('Renewing : ' + creeps[i].name);
