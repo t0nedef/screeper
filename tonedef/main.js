@@ -89,7 +89,7 @@ module.exports.loop = function () {
 		}
 
 		// renew creeps
-		var creeps = spawn.pos.findInRange(FIND_CREEPS,2);
+		var creeps = spawn.pos.findInRange(FIND_MY_CREEPS,2);
 		creeps = _.filter(creeps, (creep) => creep.ticksToLive < 1000);
 		for(var i in creeps) {
 			console.log('Renewing : ' + creeps[i].name);
@@ -127,7 +127,7 @@ module.exports.loop = function () {
 					creep.moveTo(3, 49, "E12N37");
 				} else {
 					// hostiles
-					var attackers = creep.room.find(FIND_HOSTILE_CREEPS);
+					var attackers = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
 					if(attackers.length > 0) {
 						creep.attack(attackers[0]);
 					}
