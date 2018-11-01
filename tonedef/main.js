@@ -35,6 +35,7 @@ module.exports.loop = function () {
 			}
 		}
 
+//		if(spawn.room.energyAvailable > 500) { //TODO: change to big miner
 		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
 			// respawn miner
 			// alpha
@@ -55,7 +56,9 @@ module.exports.loop = function () {
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'bminer', spawn: name, source: 1}});
 			}
+		}
 
+		if(spawn.room.energyAvailable > 200) { //TODO: change to big miner
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
 			if(geners.length < 6) {
@@ -66,7 +69,7 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.energy > 200) { //TODO: change to energy in room
+		if(spawn.room.energyAvailable > 200) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
 			if(upgraders.length < 8) {
@@ -75,7 +78,9 @@ module.exports.loop = function () {
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 					{memory: {role: 'upgrader', spawn: name}});
 			}
+		}
 
+		if(spawn.room.energyAvailable > 650) {
 			// respawn seeker
 			var seeker = _.filter(creeps, (creep) => creep.memory.role == 'seeker');
 			if(seeker.length < 1) {
