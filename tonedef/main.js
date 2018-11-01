@@ -131,6 +131,10 @@ module.exports.loop = function () {
 					if(attackers.length > 0) {
 						creep.attack(attackers[0]);
 					}
+					var attackit = Game.getObjectById("5bdb27a82881505b9341a917");
+					if(attackit) {
+						creep.attack(attackit);
+					}
 					// room == "E12N36"
 					creep.moveTo(creep.room.controller);
 					//creep.claimController(creep.room.controller);
