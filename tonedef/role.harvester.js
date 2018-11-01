@@ -12,12 +12,6 @@ var roleHarvester = {
 			creep.say("spending");
 		}
 		if(creep.memory.building) {
-			var sources = creep.room.find(FIND_SOURCES);
-			var source = sources[creep.memory.source];
-			if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-			}
-		} else {
 			var structs = _.filter(Game.structures,
 				(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
 			var struct;
@@ -30,6 +24,12 @@ var roleHarvester = {
 				if(creep.transfer(Game.spawns[creep.memory.spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(Game.spawns[creep.memory.spawn]);
 				}
+			}
+		} else {
+			var sources = creep.room.find(FIND_SOURCES);
+			var source = sources[creep.memory.source];
+			if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 			}
 		}
 	}
