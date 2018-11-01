@@ -36,6 +36,10 @@ var roleGeneral = {
 						if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 							creep.moveTo(struct);
 						}
+					} else {
+						if(creep.transfer(Game.spawns[creep.memory.spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(Game.spawns[creep.memory.spawn]);
+						}
 					}
 				}
 			}
