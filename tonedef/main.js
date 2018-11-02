@@ -68,7 +68,7 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.room.energyAvailable > 200) {
+		if(spawn.room.energyAvailable > 250) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
 			if(upgraders.length < 9) {
