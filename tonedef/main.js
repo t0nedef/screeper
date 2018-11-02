@@ -64,7 +64,7 @@ module.exports.loop = function () {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'general', spawn: name}});
+					{memory: {role: 'general', spawn: name, source: 1}});
 			}
 		}
 
@@ -75,7 +75,7 @@ module.exports.loop = function () {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'upgrader', spawn: name}});
+					{memory: {role: 'upgrader', spawn: name, source: 1}});
 			}
 		}
 
