@@ -44,7 +44,7 @@ module.exports.loop = function () {
 				console.log('Spawning new alpha miner: ' + newName);
 //				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-					{memory: {role: 'aminer', spawn: name, source: 0}});
+					{memory: {role: 'aminer', spawn: name, source: 1}});
 			}
 			// beta
 			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
@@ -64,7 +64,7 @@ module.exports.loop = function () {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'general', spawn: name, source: 1}});
+					{memory: {role: 'general', spawn: name, source: 0}});
 			}
 		}
 
