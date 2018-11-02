@@ -39,7 +39,7 @@ module.exports.loop = function () {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
-			if(miners.length < 5) {
+			if(miners.length < 2} {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
 //				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
@@ -71,7 +71,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
-			if(upgraders.length < 5) {
+			if(upgraders.length < 6) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
