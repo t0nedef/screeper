@@ -44,7 +44,7 @@ module.exports.loop = function () {
 				console.log('Spawning new alpha miner: ' + newName);
 //				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
-					{memory: {role: 'aminer', spawn: name, source: 0}});
+					{memory: {role: 'aminer', spawn: name, source: 1}});
 			}
 			// beta
 			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
@@ -53,7 +53,7 @@ module.exports.loop = function () {
 				console.log('Spawning new beta miner: ' + newName);
 //				spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'bminer', spawn: name, source: 1}});
+					{memory: {role: 'bminer', spawn: name, source: 0}});
 			}
 		}
 
@@ -71,11 +71,11 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
-			if(upgraders.length < 0) {
+			if(upgraders.length < 5) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'upgrader', spawn: name, source: 1}});
+					{memory: {role: 'upgrader', spawn: name, source: 0}});
 			}
 		}
 
