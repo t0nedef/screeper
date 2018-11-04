@@ -97,6 +97,12 @@ module.exports.loop = function () {
 			console.log('Renewing : ' + creeps[i].name);
 			spawn.renewCreep(creeps[i]);
 		}
+
+		// if an attacker is present, activate safe mode
+		var enemies = spawn.room.find(FIND_HOSTILE_CREEPS);
+		if(enemies.length > 0) {
+			spawn.room.controller.activateSafeMode();
+		}
 	}
 
 	// screep task list
