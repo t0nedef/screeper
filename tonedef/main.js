@@ -30,7 +30,7 @@ module.exports.loop = function () {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'harvester', spawn: name, source: 0}});
+					{memory: {role: 'harvester', spawn: name, source: 1}});
 			}
 		}
 
@@ -43,7 +43,7 @@ module.exports.loop = function () {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
 				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-					{memory: {role: 'aminer', spawn: name, source: 1}});
+					{memory: {role: 'aminer', spawn: name, source: 0}});
 			}
 			// beta
 			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
@@ -63,7 +63,7 @@ module.exports.loop = function () {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'general', spawn: name, source: 0}});
+					{memory: {role: 'general', spawn: name, source: 1}});
 			}
 		}
 
@@ -81,7 +81,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 870) {
 			// respawn seeker
 			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seeker.length < 0) {
+			if(seeker.length < 1) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
 				spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
