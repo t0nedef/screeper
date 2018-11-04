@@ -39,11 +39,10 @@ module.exports.loop = function () {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
-			if(miners.length < 2) {
+			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
-//				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
 					{memory: {role: 'aminer', spawn: name, source: 1}});
 			}
 			// beta
