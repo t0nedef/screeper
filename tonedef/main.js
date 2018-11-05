@@ -157,17 +157,34 @@ module.exports.loop = function () {
 //					if(enemies.length > 0) {
 //						creep.attack(enemies[0]);
 //					} else {
-						enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
-						if(enemies) {
-							if(creep.attack(enemies) == ERR_NOT_IN_RANGE) {
-								creep.moveTo(enemies);
+						var enemies = _.filter(creep.pos.findInRange(FIND_CREEPS,2),
+							(creep) => creep.my == false);
+						if(enemies.length > 0) {
+							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
+								creep.moveTo(enemies[0]);
 							}
 						}
-//					}
+//							creep.attack(enemies[0]);
+//						} else {
+//							//creep.claimController(creep.room.controller);
+//							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+//								creep.moveTo(creep.room.controller);
+//							}
+//							enemy = Game.getObjectById("5bdcf6802a146643889d60f4");
+//							if(creep.attack(enemy) == ERR_NOT_IN_RANGE) {
+//								creeep.moveTo(enemy);
+//							}
+
+//						var enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
+//						if(enemies) {
+//							if(creep.attack(enemies) == ERR_NOT_IN_RANGE) {
+//								creep.moveTo(enemies);
+//							}
+//						}
 				}
 			}
 		}
-	}
+		}
 	}
 
 	// structure task list
@@ -176,3 +193,5 @@ module.exports.loop = function () {
 		fixer.run(towers[i]);
 	}
 }
+
+//
