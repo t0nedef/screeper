@@ -107,6 +107,15 @@ module.exports.loop = function () {
 	// screep task list
 	for(var name in Game.creeps) {
 		var creep = Game.creeps[name];
+		// relocate a poorly positioned creep
+		if(creep.memory.role != 'aminer') {
+			if(creep.pos.x == 37 && creep.pos.y == 17) {
+				creep.moveTo(36, 17);
+			}
+			if(creep.pos.x == 39 && creep.pos.y == 17) {
+				creep.moveTo(40, 17);
+			}
+		}
 		if(creep.memory.role == 'harvester') {
 			creep.memory.source = 1;
 			harv.run(creep);
