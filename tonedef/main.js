@@ -152,40 +152,32 @@ module.exports.loop = function () {
 					creep.moveTo(0, 27, "W30N21");
 				} else {
 					// now in target room
-					// hostiles
+
 //					var enemies = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
 //					if(enemies.length > 0) {
 //						creep.attack(enemies[0]);
 //					} else {
 
-						var enemies = _.filter(creep.room.find(FIND_CREEPS),
-							(creep) => creep.my == false);
-						if(enemies.length > 0) {
-							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
-								creep.moveTo(enemies[0]);
-							}
-						}
-
-//							creep.attack(enemies[0]);
-//						} else {
+//						var enemies = _.filter(creep.room.find(FIND_CREEPS),
+//							(creep) => creep.my == false);
+//						if(enemies.length > 0) {
+//							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
+//								creep.moveTo(enemies[0]);
+//							}
+//						}
 
 //							//creep.claimController(creep.room.controller);
 //							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-//							if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-//								creep.moveTo(creep.room.controller);
-//							}
+							if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+								creep.moveTo(creep.room.controller);
+							}
 
-//							enemy = Game.getObjectById("5bdcf6802a146643889d60f4");
-//							if(creep.attack(enemy) == ERR_NOT_IN_RANGE) {
-//								creeep.moveTo(enemy);
+//							var enemy = Game.getObjectById("5bdcf6802a146643889d60f4");
+//							if(enemy) {
+//								if(creep.attack(enemy) == ERR_NOT_IN_RANGE) {
+//									creeep.moveTo(enemy);
+//								}
 //							}
-
-//						var enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
-//						if(enemies) {
-//							if(creep.attack(enemies) == ERR_NOT_IN_RANGE) {
-//								creep.moveTo(enemies);
-//							}
-//						}
 
 				}
 			}
