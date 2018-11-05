@@ -117,7 +117,6 @@ module.exports.loop = function () {
 			}
 		}
 		if(creep.memory.role == 'harvester') {
-			creep.memory.source = 1;
 			harv.run(creep);
 		}
 		if(creep.memory.role == 'upgrader') {
