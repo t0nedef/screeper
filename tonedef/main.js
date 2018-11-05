@@ -166,10 +166,11 @@ module.exports.loop = function () {
 //							}
 //						}
 
-//							//creep.claimController(creep.room.controller);
 //							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
 							if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
 								creep.moveTo(creep.room.controller);
+							} else {
+								creep.claimController(creep.room.controller);
 							}
 
 //							var enemy = Game.getObjectById("5bdcf6802a146643889d60f4");
