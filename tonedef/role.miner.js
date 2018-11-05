@@ -15,7 +15,9 @@ var roleMiner = {
 
 		if(creep.memory.building) {
 			var store = creep.room.storage;
-//			var store = Game.spawns["s0"];
+			if(!store) {
+				store = Game.spawns["s1"];
+			}
 			if(creep.transfer(store, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(store);
 			}
