@@ -157,13 +157,9 @@ module.exports.loop = function () {
 					if(enemies.length > 0) {
 						creep.attack(enemies[0]);
 					} else {
-						enemies = _.filter(creep.pos.findInRange(FIND_CREEPS,2),
-							(creep) => creep.my == false);
+						enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
 						if(enemies.length > 0) {
-							creep.attack(enemies[0]);
-						} else {
-							//creep.claimController(creep.room.controller);
-							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
 								creep.moveTo(creep.room.controller);
 							}
 						}
