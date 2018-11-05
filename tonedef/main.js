@@ -34,8 +34,7 @@ module.exports.loop = function () {
 			}
 		}
 
-//		if(spawn.room.energyAvailable > 400) {
-		if(spawn.room.energyAvailable > 200) {
+		if(spawn.room.energyAvailable > 400) {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
@@ -60,6 +59,7 @@ module.exports.loop = function () {
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
 			if(geners.length < 0) {
+//			if(geners.length < 4) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -71,6 +71,7 @@ module.exports.loop = function () {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
 			if(upgraders.length < 0) {
+//			if(upgraders.length < 7) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
@@ -108,12 +109,18 @@ module.exports.loop = function () {
 	for(var name in Game.creeps) {
 		var creep = Game.creeps[name];
 		// relocate a poorly positioned creep
+		if(creep.memory.wait > 0) {
+			creep.move(TOP);
+			creep.memory.wait = creep.memory.wait - 1;
+		}
 		if(creep.memory.role != 'aminer') {
 			if(creep.pos.x == 37 && creep.pos.y == 17) {
 				creep.moveTo(36, 17);
+				creep.memory.wait = 5;
 			}
 			if(creep.pos.x == 39 && creep.pos.y == 17) {
 				creep.moveTo(40, 17);
+				creep.memory.wait = 5;
 			}
 		}
 		if(creep.memory.role == 'harvester') {
