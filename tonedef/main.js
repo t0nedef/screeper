@@ -1,7 +1,7 @@
 //
 var harv = require('role.harvester');
 var upr = require('role.upgrader');
-//var builder = require('role.builder');
+var builder = require('role.builder');
 var gener = require('role.general');
 var miner = require('role.miner');
 var fixer = require('role.fixer');
@@ -80,11 +80,12 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 870) {
 			// respawn seeker
 			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seeker.length < 0) {
+			if(seeker.length < 6) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
-					{memory: {role: 'seeker', spawn: name}});
+				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE,MOVE], newName, 
+				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
+					{memory: {role: 'seeker', spawn: name, source: 1}});
 			}
 		}
 
@@ -181,6 +182,8 @@ module.exports.loop = function () {
 //									creeep.moveTo(enemy);
 //								}
 //							}
+
+					builder.run(creep);
 
 				}
 			}
