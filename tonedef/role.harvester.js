@@ -23,6 +23,15 @@ var roleHarvester = {
 			} else {
 				if(creep.transfer(Game.spawns[creep.memory.spawn], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(Game.spawns[creep.memory.spawn]);
+				} else {
+					structs = _.filter(creep.room.find(FIND_STRUCTURES),
+					(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
+					if(structs.length) {
+						struct = creep.pos.findClosestByRange(structs);
+						if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(struct);
+						}
+					}
 				}
 			}
 		} else {
