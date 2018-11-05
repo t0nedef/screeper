@@ -140,7 +140,36 @@ module.exports.loop = function () {
 			miner.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
-			seeker.run(creep);
+//			seeker.run(creep);
+
+		if(creep.room.name == "W31N22") {
+			creep.moveTo(49, 26, "W31N22");
+		} else {
+			if(creep.room.name == "W30N22") {
+				creep.moveTo(14, 49, "W30N22");
+			} else {
+				if(creep.room.name == "W30N21") {
+					creep.moveTo(0, 27, "W30N21");
+				} else {
+					// now in target room
+					// hostiles
+					var enemies = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
+					if(enemies.length > 0) {
+						creep.attack(enemies[0]);
+					} else {
+						enemies = _.filter(creep.pos.findInRange(FIND_CREEPS,2),
+							(creep) => creep.my == false);
+						if(enemies.length > 0) {
+							creep.attack(enemies[0]);
+						} else {
+							//creep.claimController(creep.room.controller);
+							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+								creep.moveTo(creep.room.controller);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
