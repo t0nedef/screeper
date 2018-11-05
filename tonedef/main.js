@@ -153,17 +153,17 @@ module.exports.loop = function () {
 				} else {
 					// now in target room
 					// hostiles
-					var enemies = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
-					if(enemies.length > 0) {
-						creep.attack(enemies[0]);
-					} else {
+//					var enemies = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
+//					if(enemies.length > 0) {
+//						creep.attack(enemies[0]);
+//					} else {
 						enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
 						if(enemies) {
 							if(creep.attack(enemies) == ERR_NOT_IN_RANGE) {
 								creep.moveTo(enemies);
 							}
 						}
-					}
+//					}
 				}
 			}
 		}
