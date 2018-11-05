@@ -157,7 +157,7 @@ module.exports.loop = function () {
 //					if(enemies.length > 0) {
 //						creep.attack(enemies[0]);
 //					} else {
-						var enemies = _.filter(creep.pos.findInRange(FIND_CREEPS,2),
+						var enemies = _.filter(creep.room.find(FIND_CREEPS),
 							(creep) => creep.my == false);
 						if(enemies.length > 0) {
 							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
