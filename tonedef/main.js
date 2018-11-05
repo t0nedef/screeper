@@ -160,7 +160,7 @@ module.exports.loop = function () {
 						enemies = Game.getObjectById("5bdcf6802a146643889d60f4");
 						if(enemies.length > 0) {
 							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
-								creep.moveTo(creep.room.controller);
+								creep.moveTo(enemies[0]);
 							}
 						}
 					}
