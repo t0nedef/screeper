@@ -172,6 +172,7 @@ module.exports.loop = function () {
 			}
 		}
 	}
+	}
 
 	// structure task list
 	var towers = _.filter(Game.structures, (structure) => structure.structureType == STRUCTURE_TOWER);
