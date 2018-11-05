@@ -85,7 +85,7 @@ module.exports.loop = function () {
 				console.log('Spawning new seeker: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE,MOVE], newName, 
 				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
-					{memory: {role: 'seeker', spawn: name, source: 1}});
+					{memory: {role: 'seeker', spawn: name, source: 0}});
 			}
 		}
 
