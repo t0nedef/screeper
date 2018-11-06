@@ -50,7 +50,7 @@ var roleHarvester = {
 				(structure) => structure.structureType == STRUCTURE_CONTAINER && structure.energy > 0);
 			if(structs.length > 0) {
 				var struct = creep.pos.findClosestByRange(structs);
-				if(creep.withdraw(struct) == ERR_NOT_IN_RANGE) {
+				if(creep.withdraw(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(struct, {visualizePathStyle: {stroke: '#ffaa00'}});
 				}
 			} else {
