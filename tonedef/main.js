@@ -144,46 +144,50 @@ module.exports.loop = function () {
 //			seeker.run(creep);
 
 		if(creep.room.name == "W31N22") {
-			creep.moveTo(49, 26, "W31N22");
-		} else {
-			if(creep.room.name == "W30N22") {
-				creep.moveTo(14, 49, "W30N22");
+
+			if(creep.memory.building && creep.carry.energy == 0) {
+				creep.memory.building = false;
+				creep.say("withdrawing");
+			}
+
+			if(creep.memory.building) {
+				var storage = creep.room.storage;
+				if(creep.transfer(storage, RESOURCE_MINERAL) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(storage);
+				}
 			} else {
-				if(creep.room.name == "W30N21") {
-					creep.moveTo(0, 27, "W30N21");
+				creep.moveTo(28, 0, "W31N22");
+			}
+//			creep.moveTo(49, 26, "W31N22");
+		} else {
+//			if(creep.room.name == "W30N22") {
+//				creep.moveTo(14, 49, "W30N22");
+			if(creep.room.name == "W31N23") {
+
+				if(creep.memory.building) {
+					creep.moveTo(28, 49, "W31N23");
 				} else {
-					// now in target room
+					creep.moveTo(24, 0, "W31N23");
+				}
 
-//					var enemies = creep.pos.findInRange(FIND_HOSTILE_CREEPS,2);
-//					if(enemies.length > 0) {
-//						creep.attack(enemies[0]);
-//					} else {
+			} else {
+//				if(creep.room.name == "W30N21") {
+//					creep.moveTo(0, 27, "W30N21");
+				if(creep.room.name == "W31N24") {
 
-//						var enemies = _.filter(creep.room.find(FIND_CREEPS),
-//							(creep) => creep.my == false);
-//						if(enemies.length > 0) {
-//							if(creep.attack(enemies[0]) == ERR_NOT_IN_RANGE) {
-//								creep.moveTo(enemies[0]);
-//							}
-//						}
+					if(!creep.memory.building && _.sum(creep.carry) == creep.carryCapacity) {
+						creep.memory.building = true;
+						creep.say("depositing");
+					}
 
-//							if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-							if(creep.room.controller && !creep.room.controller.my) {
-								if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-									creep.moveTo(creep.room.controller);
-								} else {
-									creep.claimController(creep.room.controller);
-								}
-							}
-
-//							var enemy = Game.getObjectById("5bdcf6802a146643889d60f4");
-//							if(enemy) {
-//								if(creep.attack(enemy) == ERR_NOT_IN_RANGE) {
-//									creeep.moveTo(enemy);
-//								}
-//							}
-
-					builder.run(creep);
+					if(creep.memory.building) {
+						creep.moveTo(24, 49, "W31N23");
+					} else {
+						var storage = Game.getObjectById("5bd006f300321c253c6c3adc");
+						if(creep.withdraw(storage, RESOURCE_MINERAL) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(storage);
+						}
+					}
 
 				}
 			}
