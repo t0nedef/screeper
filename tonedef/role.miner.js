@@ -15,8 +15,18 @@ var roleMiner = {
 
 		if(creep.memory.building) {
 			var store = creep.room.storage;
-			if(!store) {
-				store = Game.spawns["s1"];
+			if(!store || !creep.pos.inRangeTo(store.pos, 2)) {
+				var stores = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
+					(structure) => structure.structureType == STRUCTURE_CONTAINER);
+				if(stores.length > 0) {
+					store = stores[0];
+				} else {
+					stores = _.filter(creep.room.find(FIND_STRUCTURES),
+						(structure) => structure.structureType == STRUCTURE_SPAWN);
+					if(stores.length > 0) {
+						store = stores[0];
+					}
+				}
 			}
 			if(creep.transfer(store, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 				creep.moveTo(store);
