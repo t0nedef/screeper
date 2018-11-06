@@ -12,7 +12,7 @@ var roleHarvester = {
 			creep.say("spending");
 		}
 		if(creep.memory.building) {
-			var structs = _.filter(Game.structures,
+			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
 				(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
 			var struct;
 			if(structs.length) {
@@ -46,7 +46,7 @@ var roleHarvester = {
 		} else {
 			// look for energy hanging around
 			// look for minerals hanging around
-			var structs = _.filter(Game.structures,
+			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
 				(structure) => structure.structureType == STRUCTURE_CONTAINER && structure.energy > 0);
 			if(structs.length > 0) {
 				var struct = creep.pos.findClosestByRange(structs);
