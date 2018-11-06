@@ -47,7 +47,7 @@ var roleHarvester = {
 			// look for energy hanging around
 			// look for minerals hanging around
 			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
-				(structure) => structure.structureType == STRUCTURE_CONTAINER && structure.energy > 0);
+				(structure) => structure.structureType == STRUCTURE_CONTAINER && structure.store > 0);
 			if(structs.length > 0) {
 				var struct = creep.pos.findClosestByRange(structs);
 				if(creep.withdraw(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
