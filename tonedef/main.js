@@ -141,12 +141,11 @@ module.exports.loop = function () {
 			miner.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
-			creep.memory.building = true;
 //			seeker.run(creep);
 
 		if(creep.room.name == "W31N22") {
 
-			if(creep.memory.building && creep.carry.energy == 0) {
+			if(creep.memory.building && _.sum(creep.carry) == 0) {
 				creep.memory.building = false;
 				creep.say("withdrawing");
 			}
