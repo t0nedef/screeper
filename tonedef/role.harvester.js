@@ -44,10 +44,21 @@ var roleHarvester = {
 				}
 			}
 		} else {
-			var sources = creep.room.find(FIND_SOURCES);
-			var source = sources[creep.memory.source];
-			if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+			// look for energy hanging around
+			// look for minerals hanging around
+			var structs = _.filter(Game.structures,
+				(structure) => structure.structureType == STRUCTURE_CONTAINER && structure.energy > 0);
+			if(structs.length > 0) {
+				var struct = creep.pos.findClosestByRange(structs);
+				if(creep.withdraw(struct) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(struct, {visualizePathStyle: {stroke: '#ffaa00'}});
+				}
+			} else {
+				var sources = creep.room.find(FIND_SOURCES);
+				var source = sources[creep.memory.source];
+				if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+				}
 			}
 		}
 	}
