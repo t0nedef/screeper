@@ -141,6 +141,7 @@ module.exports.loop = function () {
 			miner.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
+			creep.memory.building = true;
 //			seeker.run(creep);
 
 		if(creep.room.name == "W31N22") {
