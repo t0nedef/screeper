@@ -52,7 +52,7 @@ module.exports.loop = function () {
 			}
 			// beta
 			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
-			if(miners.length < 1) {
+			if(miners.length < 2) { //only 2 because takes so long to get to the mine
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new beta miner: ' + newName);
 				if(name == "s0") {
