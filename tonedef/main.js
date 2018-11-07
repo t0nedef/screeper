@@ -80,7 +80,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 250 && name == "s0") {
 			// respawn seeker
 			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seeker.length < 0) {
+			if(seeker.length < 5) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE], newName, 
@@ -141,8 +141,28 @@ module.exports.loop = function () {
 			miner.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
-//			seeker.run(creep);
+			if(creep.memory.building && _.sum(creep.carry) == 0) {
+				creep.memory.building = false;
+				creep.say("withdrawing");
+			}
+			if(!creep.memory.building && _.sum(creep.carry) == creep.carryCapacity) {
+				creep.memory.building = true;
+				creep.say("depositing");
+			}
+			if(creep.memory.building) {
+				var storage = creep.room.storage;
+				if(creep.transfer(storage, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(storage);
+				}
+			} else {
+				var source = Game.getObjectById("5be2df9f3e112d0e16eb5371");
+				if(creep.transfer(storage, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(storage);
+				}
+			}
 
+//			seeker.run(creep);
+/*
 		if(creep.room.name == "W31N22") {
 
 			if(creep.memory.building && _.sum(creep.carry) == 0) {
@@ -192,6 +212,7 @@ module.exports.loop = function () {
 				}
 			}
 		}
+*/
 		}
 	}
 
