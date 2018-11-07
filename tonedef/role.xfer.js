@@ -28,22 +28,31 @@ var roleXfer = {
 				}
 			}
 		} else {
-			var structs = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
-				(structure) => structure.structureType == STRUCTURE_LINK);
+			var structs = _.filter(creep.room.find(FIND_TOMBSTONES),
+				(structure) => _.sum(structure.store) > 0);
 			if(structs.length) {
 				var source = structs[0];
-				structs = _.filter(creep.room.find(FIND_STRUCTURES),
-					(structure) => structure.structureType == STRUCTURE_LINK &&
-					structure.energy > 200 && structure.id != source.id);
-				if(structs.length) {
-					structs[0].transferEnergy(source);
-				}
 				if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 				}
 			} else {
-				var store = creep.room.storage;
-				creep.moveTo(store, {visualizePathStyle: {stroke: '#ffaa00'}});
+				var structs = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
+					(structure) => structure.structureType == STRUCTURE_LINK);
+				if(structs.length) {
+					var source = structs[0];
+					structs = _.filter(creep.room.find(FIND_STRUCTURES),
+						(structure) => structure.structureType == STRUCTURE_LINK &&
+						structure.energy > 200 && structure.id != source.id);
+					if(structs.length) {
+						structs[0].transferEnergy(source);
+					}
+					if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					}
+				} else {
+					var store = creep.room.storage;
+					creep.moveTo(store, {visualizePathStyle: {stroke: '#ffaa00'}});
+				}
 			}
 		}
 	}
