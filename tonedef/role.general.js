@@ -16,12 +16,13 @@ var roleGeneral = {
 		}
 
 		if(creep.memory.building) {
+/*
 			var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 			if(target) {
 				if(creep.build(target) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
 				}
-/*
+*/
 			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
 				(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
 			if(structs.length) {
@@ -29,8 +30,8 @@ var roleGeneral = {
 				if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(struct);
 				}
-*/
 			} else {
+/*
 				var structs = _.filter(creep.room.find(FIND_STRUCTURES),
 					(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
 				if(structs.length) {
@@ -38,13 +39,12 @@ var roleGeneral = {
 					if(creep.transfer(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(struct);
 					}
-/*
+*/
 				var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
 				if(target) {
 					if(creep.build(target) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
 					}
-*/
 				} else {
 					structs = _.filter(Game.structures,
 						(structure) => structure.structureType == STRUCTURE_EXTENSION && structure.energy < structure.energyCapacity);
