@@ -21,6 +21,7 @@ module.exports.loop = function () {
 	for(var name in Game.spawns) {
 		var spawn = Game.spawns[name];
 		var creeps = spawn.room.find(FIND_MY_CREEPS);
+		var src = 0;
 	
 		// respawn
 		// respawn harvester
@@ -41,17 +42,27 @@ module.exports.loop = function () {
 			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
+				if(name == "s0") {
+					src = 1;
+				} else { //s1
+					src = 0;
+				}
 				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-					{memory: {role: 'aminer', spawn: name, source: 1}});
+					{memory: {role: 'aminer', spawn: name, source: src}});
 			}
 			// beta
 			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
 			if(miners.length < 1) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new beta miner: ' + newName);
+				if(name == "s0") {
+					src = 0;
+				} else { //s1
+					src = 1;
+				}
 //				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
 				spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
-					{memory: {role: 'bminer', spawn: name, source: 0}});
+					{memory: {role: 'bminer', spawn: name, source: src}});
 			}
 		}
 
