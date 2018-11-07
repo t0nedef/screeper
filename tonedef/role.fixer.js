@@ -6,7 +6,9 @@ var roleFixer = {
 			// hostiles
 			var attackers = tower.room.find(FIND_HOSTILE_CREEPS);
 			if(attackers.length > 0) {
-				tower.attack(attackers[0]);
+				var enemy = attackers[0];
+				Game.notify("attacking an invader from ", enemy.owner.username);
+				tower.attack(enemy);
 			} else {
 				var structs = _.filter(tower.room.find(FIND_STRUCTURES),
 					(structure) => structure.hits < structure.hitsMax);
