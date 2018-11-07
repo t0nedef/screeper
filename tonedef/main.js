@@ -151,12 +151,12 @@ module.exports.loop = function () {
 			}
 			if(creep.memory.building) {
 				var storage = creep.room.storage;
-				if(creep.transfer(storage, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
+				if(creep.transfer(storage, RESOURCE_UTRIUM_HYDRIDE) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(storage);
 				}
 			} else {
 				var source = Game.getObjectById("5be2df9f3e112d0e16eb5371");
-				if(creep.transfer(storage, RESOURCE_LEMERGIUM) == ERR_NOT_IN_RANGE) {
+				if(creep.transfer(storage, RESOURCE_UTRIUM_HYDRIDE) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(storage);
 				}
 			}
