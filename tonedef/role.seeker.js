@@ -8,7 +8,7 @@ var roleSeeker = {
 			creep.moveTo(28, 0, "W31N22");
 		} else {
 			if(creep.room.name == "W31N23") {
-				creep.moveTo(24, 0, "W31N23");
+				creep.moveTo(0, 25, "W31N23");
 			} else {
 				if(creep.room.name == "W32N23") {
 					var spawns = creep.room.find(STRUCTURE_SPAWN);
