@@ -5,7 +5,10 @@ var roleSeeker = {
 	run: function(creep) {
 
 		if(creep.room.name == "W31N22") {
-			creep.moveTo(28, 0, "W31N22");
+			var seekers = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
+			if(seekers.length == 15) {
+				creep.moveTo(28, 0, "W31N22");
+			}
 		} else {
 			if(creep.room.name == "W31N23") {
 				creep.moveTo(0, 21, "W31N23");
