@@ -61,28 +61,6 @@ var roleGeneral = {
 			}
 		}
 		else {
-
-
-			// look for energy hanging around
-			// look for minerals hanging around
-			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
-				(structure) => structure.structureType == STRUCTURE_CONTAINER && _sum(structure.store) > 0);
-			if(structs.length > 0) {
-				creep.say("checking range on container");
-				var struct = creep.pos.findClosestByRange(structs);
-				if(creep.withdraw(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.say("getting closer to container");
-					creep.moveTo(struct, {visualizePathStyle: {stroke: '#ffaa00'}});
-				}
-			} else {
-				creep.say("no structures found");
-				var sources = creep.room.find(FIND_SOURCES);
-				var source = sources[creep.memory.source];
-				if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-				}
-			}
-
 			var source = creep.room.storage;
 			if(source) {
 				if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
