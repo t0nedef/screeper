@@ -20,6 +20,13 @@ var roleMiner = {
 					(structure) => structure.structureType == STRUCTURE_CONTAINER);
 				if(stores.length > 0) {
 					store = stores[0];
+					if(_.sum(store.store) == store.storeCapacity) {
+						stores = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
+							(structure) => structure.structureType == STRUCTURE_LINK);
+						if(stores.length > 0) {
+							store = stores[0];
+						}
+					}
 				} else {
 					stores = _.filter(creep.room.find(FIND_STRUCTURES),
 						(structure) => structure.structureType == STRUCTURE_SPAWN);
