@@ -51,18 +51,20 @@ module.exports.loop = function () {
 					{memory: {role: 'aminer', spawn: name, source: src}});
 			}
 			// beta
-			miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
-			if(miners.length < 2) { //only 2 because takes so long to get to the mine
-				var newName = 'miner' + Game.time;
-				console.log('Spawning new beta miner: ' + newName);
-				if(name == "s0") {
-					src = 0;
-				} else { //s1
-					src = 1;
+			if(spawn.room.energyAvailable > 600) {
+				miners = _.filter(creeps, (creep) => creep.memory.role == 'bminer');
+				if(miners.length < 2) { //only 2 because takes so long to get to the mine
+					var newName = 'miner' + Game.time;
+					console.log('Spawning new beta miner: ' + newName);
+					if(name == "s0") {
+						src = 0;
+					} else { //s1
+						src = 1;
+					}
+//					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+					spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
+						{memory: {role: 'bminer', spawn: name, source: src}});
 				}
-//				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-				spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
-					{memory: {role: 'bminer', spawn: name, source: src}});
 			}
 		}
 
@@ -72,8 +74,13 @@ module.exports.loop = function () {
 			if(geners.length < 5) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'general', spawn: name, source: 0}});
+				if(spawn.room.energyAvailable > 400) {
+					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE], newName, 
+						{memory: {role: 'general', spawn: name, source: 0}});
+				} else {
+					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+						{memory: {role: 'general', spawn: name, source: 0}});
+				}
 			}
 		}
 
@@ -83,8 +90,13 @@ module.exports.loop = function () {
 			if(upgraders.length < 7) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
-					{memory: {role: 'upgrader', spawn: name, source: 1}});
+				if(spawn.room.energyAvailable > 400) {
+					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE], newName, 
+						{memory: {role: 'upgrader', spawn: name, source: 1}});
+				} else {
+					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+						{memory: {role: 'upgrader', spawn: name, source: 1}});
+				}
 			}
 		}
 
