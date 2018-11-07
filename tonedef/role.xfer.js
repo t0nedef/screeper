@@ -15,9 +15,17 @@ var roleXfer = {
 
 		// check for a nearby link, help empty other links
 		if(creep.memory.building) {
-			var store = creep.room.storage;
-			if(creep.transfer(store, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-				creep.moveTo(store, {visualizePathStyle: {stroke: '#ffaa00'}});
+			var towers = _.filter(creep.room.find(FIND_STRUCTURES),
+				(structure) => structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
+			if(towers.length) {
+				if(creep.transfer(towers[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(towers[0]);
+				}
+			} else {
+				var store = creep.room.storage;
+				if(creep.transfer(store, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(store, {visualizePathStyle: {stroke: '#ffaa00'}});
+				}
 			}
 		} else {
 			var structs = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
