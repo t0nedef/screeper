@@ -71,25 +71,33 @@ var roleGeneral = {
 					(structure) => structure.structureType == STRUCTURE_LINK);
 				if(structs.length) {
 					if(creep.memory.linkRun) {
-						if(creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+						var ans = creep.transfer(source, RESOURCE_ENERGY);
+						if(ans == ERR_NOT_IN_RANGE) {
 							creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 						} else {
-							creep.memory.linkRun = false;
+							if(ans == 0) {
+								creep.memory.linkRun = false;
+							}
 						}
-          } else {
+					} else {
 						source = structs[0];
 						structs = _.filter(creep.room.find(FIND_STRUCTURES),
 							(structure) => structure.structureType == STRUCTURE_LINK &&
 							structure.energy > 200 && structure.name != source.name);
 						if(structs.length) {
 							structs[0].transferEnergy(source);
-							creep.memory.linkRun = true;
 						}
 					}
 				}
-				//
-				if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+				if(!creep.memory.linkRun) {
+					var ans = creep.withdraw(source, RESOURCE_ENERGY);
+					if(ans == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					} else {
+						if(ans == 0) {
+							creep.memory.linkRun = true;
+						}
+					}
 				}
 			} else {
 				var structs = _.filter(creep.room.find(FIND_STRUCTURES),
