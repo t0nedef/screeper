@@ -104,11 +104,11 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 250 && name == "s0") {
 			// respawn seeker
 			var seekers = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seekers.length < 1) {
+			if(seekers.length < 15) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				//spawn.spawnCreep([MOVE,ATTACK], newName,
-				spawn.spawnCreep([TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK], newName,
+				spawn.spawnCreep([MOVE,ATTACK], newName,
+				//spawn.spawnCreep([TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK], newName,
 					{memory: {role: 'seeker', spawn: name, source: 0}});
 			}
 			// respawn seeker
