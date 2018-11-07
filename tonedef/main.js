@@ -107,9 +107,18 @@ module.exports.loop = function () {
 			if(seekers.length < 1) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				spawn.spawnCreep([MOVE,ATTACK], newName,
-				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName,
+				//spawn.spawnCreep([MOVE,ATTACK], newName,
+				spawn.spawnCreep([TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK], newName,
 					{memory: {role: 'seeker', spawn: name, source: 0}});
+			}
+			// respawn seeker
+			var seekers = _.filter(Game.creeps, (creep) => creep.memory.role == 'seekerb');
+			if(seekers.length < 0) {
+				var newName = 'seek' + Game.time;
+				console.log('Spawning new seekerh: ' + newName);
+				//spawn.spawnCreep([MOVE,ATTACK], newName,
+				spawn.spawnCreep([TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK], newName,
+					{memory: {role: 'seekerb', spawn: name, source: 0}});
 			}
 		}
 
