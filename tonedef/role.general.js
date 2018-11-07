@@ -9,8 +9,10 @@ var roleGeneral = {
 			creep.say("harvesting");
 		}
 		if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-			creep.memory.building = true;
-			creep.say("building");
+			if(!creep.memory.linkRun) {
+				creep.memory.building = true;
+				creep.say("building");
+			}
 		}
 
 		if(creep.memory.building) {
@@ -64,6 +66,27 @@ var roleGeneral = {
 			// look for minerals hanging around
 			var source = creep.room.storage;
 			if(source) {
+				// check for a nearby link, help empty other links
+				var structs = _.filter(creep.pos.findInRange(FIND_STRUCTURES, 2),
+					(structure) => structure.structureType == STRUCTURE_LINK);
+				if(structs.length) {
+					if(creep.memory.linkRun) {
+						if(creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+							creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+						} else {
+							creep.memory.linkRun = false;
+						}
+          } else {
+						source = structs[0];
+						structs = _.filter(creep.room.find(FIND_STRUCTURES),
+							(structure) => structure.structureType == STRUCTURE_LINK && structure.energy > 200);
+						if(structs.length) {
+							structs[0].transferEnergy(source, 200);
+							creep.memory.linkRun = true;
+						}
+					}
+				}
+				//
 				if(creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 				}
