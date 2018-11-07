@@ -135,6 +135,7 @@ module.exports.loop = function () {
 		// if an attacker is present, activate safe mode
 		var enemies = spawn.room.find(FIND_HOSTILE_CREEPS);
 		if(enemies.length > 0 && enemies[0].owner.username != "Invader") {
+			Game.notify("enabling safe mode because i detected an invader from ", enemies[0].owner.username);
 			spawn.room.controller.activateSafeMode();
 		}
 	}
