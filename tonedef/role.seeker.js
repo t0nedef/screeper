@@ -11,8 +11,10 @@ var roleSeeker = {
 				creep.moveTo(0, 25, "W31N23");
 			} else {
 				if(creep.room.name == "W32N23") {
-					var spawns = creep.room.find(STRUCTURE_SPAWN);
-					creep.moveTo(spawns[0]);
+					//var spawns = creep.room.find(STRUCTURE_SPAWN);
+					//var spawn = spawns[0];
+					var spawn = Game.getObjectById("5bdd995825639f4f35687192");
+					creep.moveTo(spawn);
 				}
 			}
 		}
