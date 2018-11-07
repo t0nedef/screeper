@@ -79,7 +79,8 @@ var roleGeneral = {
           } else {
 						source = structs[0];
 						structs = _.filter(creep.room.find(FIND_STRUCTURES),
-							(structure) => structure.structureType == STRUCTURE_LINK && structure.energy > 200);
+							(structure) => structure.structureType == STRUCTURE_LINK &&
+							structure.energy > 200 && structure.name != source.name);
 						if(structs.length) {
 							structs[0].transferEnergy(source);
 							creep.memory.linkRun = true;
