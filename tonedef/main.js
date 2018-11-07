@@ -5,7 +5,7 @@ var builder = require('role.builder');
 var gener = require('role.general');
 var miner = require('role.miner');
 var fixer = require('role.fixer');
-var xfer = require('role.Xfer');
+var xfer = require('role.xfer');
 var seeker = require('role.seeker');
 
 module.exports.loop = function () {
