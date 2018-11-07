@@ -5,6 +5,7 @@ var builder = require('role.builder');
 var gener = require('role.general');
 var miner = require('role.miner');
 var fixer = require('role.fixer');
+var xfer = require('role.xfer');
 var seeker = require('role.seeker');
 
 module.exports.loop = function () {
@@ -102,13 +103,24 @@ module.exports.loop = function () {
 
 		if(spawn.room.energyAvailable > 250 && name == "s0") {
 			// respawn seeker
-			var seeker = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
-			if(seeker.length < 0) {
+			var seekers = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
+			if(seekers.length < 0) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
 				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName,
 					{memory: {role: 'seeker', spawn: name, source: 0}});
+			}
+		}
+
+		if(spawn.room.energyAvailable > 500 && name == "s0") {
+			// respawn xfer
+			var xfers = _.filter(creeps, (creep) => creep.memory.role == 'xfer');
+			if(xfers.length < 1) {
+				var newName = 'xfer' + Game.time;
+				console.log('Spawning new xfer: ' + newName);
+				spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
+					{memory: {role: 'xfer', spawn: name}});
 			}
 		}
 
@@ -162,6 +174,9 @@ module.exports.loop = function () {
 		}
 		if(creep.memory.role == 'bminer') {
 			miner.run(creep);
+		}
+		if(creep.memory.role == 'xfer') {
+			xfer.run(creep);
 		}
 		if(creep.memory.role == 'seeker') {
 			if(creep.memory.building && _.sum(creep.carry) == 0) {
