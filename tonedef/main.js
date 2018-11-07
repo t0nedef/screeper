@@ -30,7 +30,7 @@ module.exports.loop = function () {
 			if(harvesters.length < 5) {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 					{memory: {role: 'harvester', spawn: name, source: 0}});
 			}
 		}
@@ -61,7 +61,7 @@ module.exports.loop = function () {
 					} else { //s1
 						src = 1;
 					}
-//					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+//					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 					spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
 						{memory: {role: 'bminer', spawn: name, source: src}});
 				}
@@ -74,11 +74,11 @@ module.exports.loop = function () {
 			if(geners.length < 5) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
-				if(spawn.room.energyAvailable > 400) {
-					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE], newName, 
+				if(spawn.room.energyAvailable > 500) {
+					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
 						{memory: {role: 'general', spawn: name, source: 0}});
 				} else {
-					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 						{memory: {role: 'general', spawn: name, source: 0}});
 				}
 			}
@@ -90,11 +90,11 @@ module.exports.loop = function () {
 			if(upgraders.length < 7) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
-				if(spawn.room.energyAvailable > 400) {
-					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE], newName, 
+				if(spawn.room.energyAvailable > 500) {
+					spawn.spawnCreep([WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE], newName,
 						{memory: {role: 'upgrader', spawn: name, source: 1}});
 				} else {
-					spawn.spawnCreep([WORK,CARRY,MOVE], newName, 
+					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 						{memory: {role: 'upgrader', spawn: name, source: 1}});
 				}
 			}
@@ -106,8 +106,8 @@ module.exports.loop = function () {
 			if(seeker.length < 0) {
 				var newName = 'seek' + Game.time;
 				console.log('Spawning new seeker: ' + newName);
-				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE], newName, 
-				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName, 
+				spawn.spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
+				//spawn.spawnCreep([MOVE,MOVE,CLAIM,TOUGH,ATTACK,ATTACK], newName,
 					{memory: {role: 'seeker', spawn: name, source: 0}});
 			}
 		}
