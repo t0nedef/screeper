@@ -8,6 +8,7 @@ var roleSeeker = {
 			if(creep.memory.march) {
 				creep.moveTo(28, 0, "W31N22");
 			} else {
+				creep.moveTo(28, 5, "W31N22");
 				var seekers = _.filter(Game.creeps, (creep) => creep.memory.role == 'seeker');
 				if(seekers.length == 15) {
 					creep.memory.march = 1;
