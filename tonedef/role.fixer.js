@@ -19,7 +19,7 @@ var roleFixer = {
 //					console.log('Tower found no roads in need of repair');
 					var walls = _.filter(structs,
 						(structure) => (structure.structureType == STRUCTURE_WALL ||
-						structure.structureType == STRUCTURE_RAMPART) && structure.hits < 1000);
+						structure.structureType == STRUCTURE_RAMPART) && structure.hits < 10000);
 					if(walls.length > 0) {
 						tower.repair(walls[0]);
 					} else {
