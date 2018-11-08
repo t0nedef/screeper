@@ -25,12 +25,21 @@ var roleSeeker = {
 					if(creep.attack(ramp) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(ramp);
 					}
-					/*} else {
-						//var spawns = creep.room.find(STRUCTURE_SPAWN);
-						//var spawn = spawns[0];
-						var spawn = Game.getObjectById("5bdd995825639f4f35687192");
+/*
+					var towers = _.filter(creep.room.find(FIND_STRUCTURES),
+						(structure) => structure.structureType == STRUCTURE_TOWER);
+					var tower = towers[0];
+					if(creep.attack(tower) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(tower);
+					}
+*/
+/*
+					var spawns = creep.room.find(STRUCTURE_SPAWN);
+					var spawn = spawns[0];
+					if(creep.attack(spawn) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(spawn);
-					}*/
+					}
+*/
 				}
 			}
 		}
