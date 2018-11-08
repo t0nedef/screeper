@@ -19,17 +19,18 @@ var roleSeeker = {
 				creep.moveTo(0, 21, "W31N23");
 			} else {
 				if(creep.room.name == "W32N23") {
-					if(creep.memory.march == 1) {
-						creep.moveTo(45, 21, "W31N23");
-						if(creep.pos.x == 45 && creep.pos.x == 21) {
-							creep.memory.march == 2;
-						}
-					} else {
+					var ramps = _.filter(creep.room.find(FIND_STRUCTURES),
+						(structure) => structure.structureType == STRUCTURE_RAMPART);
+					var ramp = ramps[0];
+					if(creep.attack(ramp) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(ramp);
+					}
+					/*} else {
 						//var spawns = creep.room.find(STRUCTURE_SPAWN);
 						//var spawn = spawns[0];
 						var spawn = Game.getObjectById("5bdd995825639f4f35687192");
 						creep.moveTo(spawn);
-					}
+					}*/
 				}
 			}
 		}
