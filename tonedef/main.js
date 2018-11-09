@@ -108,7 +108,8 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 250) {
 			// respawn upgrader
 			var upgraders = _.filter(creeps, (creep) => creep.memory.role == 'upgrader');
-			if((upgraders.length < 7 && name == "s0") || (upgraders.length < 3 && name == "s1")) {
+			//if((upgraders.length < 7 && name == "s0") || (upgraders.length < 3 && name == "s1")) {
+			if(upgraders.length < 7) {
 				var newName = 'upr' + Game.time;
 				console.log('Spawning new upgrader: ' + newName);
 				if(spawn.room.energyAvailable > 500) {
