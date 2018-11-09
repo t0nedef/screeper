@@ -71,7 +71,7 @@ var roleHarvester = {
 						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
 					} else if(err == 0) { //save source until its exhausted
 						creep.memory.loadingFrom = true;
-						creep.memory.lastSrcType = FIND_STRUCTURES;
+						creep.memory.lastSrcType = FIND_SOURCES;
 						creep.memory.lastSrc = source.id;
 					}
 				}
