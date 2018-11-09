@@ -40,7 +40,7 @@ module.exports.loop = function () {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
-			if(miners.length < 3 && name == "s0") {
+			if(miners.length < 3) {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
 				if(name == "s0") {
@@ -48,8 +48,7 @@ module.exports.loop = function () {
 				} else { //s1
 					src = 0;
 				}
-//				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
 					{memory: {role: 'aminer', spawn: name, source: src}});
 			}
 			// beta
@@ -63,8 +62,7 @@ module.exports.loop = function () {
 					} else { //s1
 						src = 1;
 					}
-//					spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
-					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+					spawn.spawnCreep([WORK,WORK,WORK,WORK,WORK,CARRY,MOVE], newName,
 						{memory: {role: 'bminer', spawn: name, source: src}});
 				}
 			}
