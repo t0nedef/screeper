@@ -11,6 +11,7 @@ var roleGeneral = {
 		}
 		if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
 			creep.memory.building = true;
+			creep.memory.loadingFrom = false;
 			creep.say("building");
 		}
 
