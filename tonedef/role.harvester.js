@@ -9,6 +9,7 @@ var roleHarvester = {
 		}
 		if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
 			creep.memory.building = true;
+			creep.memory.loadingFrom = false;
 			creep.say("spending");
 		}
 		if(creep.memory.building) {
@@ -46,21 +47,49 @@ var roleHarvester = {
 		} else {
 			// look for energy hanging around
 			// look for minerals hanging around
-			var structs = _.filter(creep.room.find(FIND_STRUCTURES),
-				(structure) => structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) > 0);
-			if(structs.length > 0) {
-				creep.say("checking range on container");
-				var struct = creep.pos.findClosestByRange(structs);
-				if(creep.withdraw(struct, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.say("getting closer to container");
-					creep.moveTo(struct, {visualizePathStyle: {stroke: '#ffaa00'}});
+			if(creep.memory.loadingFrom == false) {
+				var sources = _.filter(creep.room.find(FIND_STRUCTURES),
+					(structure) => structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) > 0);
+				if(sources.length > 0) {
+					creep.say("checking range on container");
+					var source = creep.pos.findClosestByRange(sources);
+					var err = creep.withdraw(source, RESOURCE_ENERGY);
+					if(err == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					} else if(err == 0) { //save source until its exhausted
+						creep.memory.loadingFrom = true;
+						creep.memory.lastSrcType = FIND_STRUCTURES;
+						creep.memory.lastSrc = source.id;
+					}
+				} else {
+					creep.say("no structures found");
+					sources = creep.room.find(FIND_SOURCES);
+					var source = sources[creep.memory.source];
+					var err = creep.harvest(source);
+					if(err == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					} else if(err == 0) { //save source until its exhausted
+						creep.memory.loadingFrom = true;
+						creep.memory.lastSrcType = FIND_STRUCTURES;
+						creep.memory.lastSrc = source.id;
+					}
 				}
+			// then harvest,withdraw from the same source
 			} else {
-				creep.say("no structures found");
-				var sources = creep.room.find(FIND_SOURCES);
-				var source = sources[creep.memory.source];
-				if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+				var source = Game.getObjectById(creep.memory.lastSrc);
+				if(creep.memory.lastSrcType == FIND_SOURCES) {
+					if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					} else if(err == ERR_NOT_ENOUGH_ENERGY) {
+						creep.memory.building = true;
+					}
+				} else if (creep.memory.lastSrcType == FIND_STRUCTURES) {
+					var err = creep.withdraw(source, RESOURCE_ENERGY);
+					if(err == ERR_NOT_IN_RANGE) {
+						creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+					} else if(err == ERR_NOT_ENOUGH_ENERGY) {
+						creep.memory.building = true;
+					}
 				}
 			}
 		}
