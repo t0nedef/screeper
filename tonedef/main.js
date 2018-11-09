@@ -73,7 +73,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
-			if(geners.length < 2) {
+			if(geners.length < 3) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				if(spawn.room.energyAvailable > 500) {
@@ -83,6 +83,17 @@ module.exports.loop = function () {
 					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
 						{memory: {role: 'general', spawn: name, source: 0}});
 				}
+			}
+		}
+
+		if(spawn.room.energyAvailable > 200) {
+			// respawn builder
+			var geners = _.filter(creeps, (creep) => creep.memory.role == 'generalb');
+			if(geners.length < 3) {
+				var newName = 'gener' + Game.time;
+				console.log('Spawning new gener: ' + newName);
+				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+					{memory: {role: 'generalb', spawn: name, source: 0}});
 			}
 		}
 
@@ -179,7 +190,10 @@ module.exports.loop = function () {
 			gener.run(creep);
 		}
 		if(creep.memory.role == 'general') {
-			gener.run(creep);
+			gener.run(creep, true);
+		}
+		if(creep.memory.role == 'generalb') {
+			gener.run(creep, false);
 		}
 		if(creep.memory.role == 'aminer') {
 			miner.run(creep);
