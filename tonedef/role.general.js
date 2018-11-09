@@ -89,7 +89,7 @@ var roleGeneral = {
 					}
 				} else {
 					var sources = _.filter(creep.room.find(FIND_STRUCTURES),
-						(structure) => structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) > 0);
+						(structure) => structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) > 200);
 					if(sources.length > 0) {
 						source = creep.pos.findClosestByRange(sources);
 						var err = creep.withdraw(source, RESOURCE_ENERGY);
