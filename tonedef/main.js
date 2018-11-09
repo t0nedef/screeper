@@ -36,7 +36,7 @@ module.exports.loop = function () {
 			}
 		}
 
-		if(spawn.room.energyAvailable > 400) {
+		if(spawn.room.energyAvailable > 200) {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
@@ -48,8 +48,13 @@ module.exports.loop = function () {
 				} else { //s1
 					src = 0;
 				}
-				spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-					{memory: {role: 'aminer', spawn: name, source: src}});
+				if(spawn.room.energyAvailable > 400) {
+					spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
+						{memory: {role: 'aminer', spawn: name, source: src}});
+				} else {
+					spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+						{memory: {role: 'aminer', spawn: name, source: src}});
+				}
 			}
 			// beta
 			if(spawn.room.energyAvailable > 400) {
@@ -62,8 +67,13 @@ module.exports.loop = function () {
 					} else { //s1
 						src = 1;
 					}
-					spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
-						{memory: {role: 'bminer', spawn: name, source: src}});
+					if(spawn.room.energyAvailable > 400) {
+						spawn.spawnCreep([WORK,WORK,WORK,CARRY,MOVE], newName,
+							{memory: {role: 'bminer', spawn: name, source: src}});
+					} else {
+						spawn.spawnCreep([WORK,CARRY,MOVE], newName,
+							{memory: {role: 'bminer', spawn: name, source: src}});
+					}
 				}
 			}
 		}
