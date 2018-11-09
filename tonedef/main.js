@@ -28,7 +28,7 @@ module.exports.loop = function () {
 		// respawn harvester
 		if(spawn.room.energyAvailable > 200) {
 			var harvesters = _.filter(creeps, (creep) => creep.memory.role == 'harvester');
-			if(harvesters.length < 5) {
+			if(harvesters.length < 2) {
 				var newName = 'harv' + Game.time;
 				console.log('Spawning new harvester: ' + newName);
 				spawn.spawnCreep([WORK,CARRY,MOVE], newName,
@@ -40,7 +40,7 @@ module.exports.loop = function () {
 			// respawn miner
 			// alpha
 			var miners = _.filter(creeps, (creep) => creep.memory.role == 'aminer');
-			if(miners.length < 3) {
+			if(miners.length < 3 && name == "s0") {
 				var newName = 'miner' + Game.time;
 				console.log('Spawning new alpha miner: ' + newName);
 				if(name == "s0") {
@@ -73,7 +73,7 @@ module.exports.loop = function () {
 		if(spawn.room.energyAvailable > 200) {
 			// respawn builder
 			var geners = _.filter(creeps, (creep) => creep.memory.role == 'general');
-			if(geners.length < 5) {
+			if(geners.length < 2) {
 				var newName = 'gener' + Game.time;
 				console.log('Spawning new gener: ' + newName);
 				if(spawn.room.energyAvailable > 500) {
