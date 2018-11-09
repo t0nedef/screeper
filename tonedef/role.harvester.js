@@ -47,7 +47,7 @@ var roleHarvester = {
 		} else {
 			// look for energy hanging around
 			// look for minerals hanging around
-			if(creep.memory.loadingFrom == false) {
+			if(!creep.memory.loadingFrom) {
 				var sources = _.filter(creep.room.find(FIND_STRUCTURES),
 					(structure) => structure.structureType == STRUCTURE_CONTAINER && _.sum(structure.store) > 0);
 				if(sources.length > 0) {

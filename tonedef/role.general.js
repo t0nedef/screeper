@@ -75,7 +75,7 @@ var roleGeneral = {
 		} else {
 			// look for energy hanging around
 			// look for minerals hanging around
-			if(creep.memory.loadingFrom == false) {
+			if(!creep.memory.loadingFrom) {
 				var source = creep.room.storage;
 				if(source) {
 					var err = creep.withdraw(source, RESOURCE_ENERGY);
